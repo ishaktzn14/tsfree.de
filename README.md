@@ -1,4 +1,4 @@
-# TeamSpeak Hosting Script (STABLE)
+# TeamSpeak Hosting Script (ALPHA)
 
 Script is written in PHP, MYSQL and HTML.
 
