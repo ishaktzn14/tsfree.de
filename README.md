@@ -6,8 +6,11 @@ Just configure the config.php file with your Database data (TeamSpeak and MYSQL)
 Screenshots:
 
 ![img1](https://i.imgur.com/O8bHtIK.png)
+
 ![img2](https://i.imgur.com/CtF5Tpl.png)
+
 ![img3](https://i.imgur.com/CFX2vc4.png)
+
 ![img4](https://i.imgur.com/suYUO0b.png)
 ***
 _If you have Problems feel free to contact me._
