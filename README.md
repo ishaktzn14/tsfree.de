@@ -44,8 +44,7 @@ $DB_USER = "root";
 $DB_PASS = "";
 ?>
 ```
-
-**Screenshots**
+## Screenshots
 
 ![img1](https://i.imgur.com/O8bHtIK.png)
 
