@@ -96,12 +96,12 @@
 }
 } else {
 
-  $servername = $_POST['servername'];
-  $slots = $_POST['slots'];
+  $servername = mysql_real_escape_string($_POST['servername']);
+  $slots = mysql_real_escape_string($_POST['slots']);
   $unixTime = time();
   $realTime = date('[Y-m-d]-[H:i]',$unixTime);
-  $serverpassword = $_POST['serverpassword'];
-  $hostbanner_url = $_POST['hostbanner_url'];
+  $serverpassword = mysql_real_escape_string($_POST['serverpassword']);
+  $hostbanner_url = mysql_real_escape_string($_POST['hostbanner_url']);
 
   // HTML CHANGES
   if(strlen($servername) > 25) {
