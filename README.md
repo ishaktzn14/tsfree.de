@@ -9,7 +9,7 @@ A simple TeamSpeak Hosting Script with Database integration, written in PHP, MyS
 
 **Creating the MySQL Database**
 
-*Create Database "ts" and table "ts".
+*Create Database "ts" and table "ts".*
 
 ```mysql
 CREATE TABLE `ts` (
@@ -26,6 +26,8 @@ CREATE TABLE `ts` (
 ```
 
 **Setup the `config.php` file**
+
+*Fill in your TeamSpeak- and Server Database Data.*
 
 ```php
 <?php
