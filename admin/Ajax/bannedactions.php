@@ -16,22 +16,21 @@ if(strpos(strtolower($id), 'union') || strpos(strtolower($id), 'select') || strp
 if ($act=='del'){
 	mysqli_query($con,"DELETE FROM banned WHERE id='$id'");
 	mysqli_close($con);
-	echo "<script language='javascript'>alert('Data Deleted.');</script>";
 }
 
 if ($act=='add'){
-	if (!filter_var($_POST[ipaddr], FILTER_VALIDATE_IP) === false) {	
+	if (!filter_var($_POST[ipaddr], FILTER_VALIDATE_IP) === false) {
 		// make sure the ip address is unique
 		$query = mysqli_query($con,"SELECT * FROM banned WHERE ipaddr = '$_POST[ipaddr]'");
 		$match = mysqli_num_rows($query);
 		if ($match > 0){
-			echo "<script language='javascript'>alert('This IP Address already banned.');
+			echo "<script language='javascript'>alert('IP Address already banned.');
 			document.location='../page.php?page=banned';</script>";
 			exit();
 		}
 		mysqli_query($con,"INSERT INTO banned (`id` ,`ipaddr`) VALUES (NULL, '$_POST[ipaddr]')");
 		mysqli_close($con);
-		echo "<script language='javascript'>alert('Data Added.');
+		echo "<script language='javascript'>
 		document.location='../page.php?page=banned';</script>";
 	} else {
 		echo "<script language='javascript'>alert('$_POST[ipaddr] is not a valid IP address');

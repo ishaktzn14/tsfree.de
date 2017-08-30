@@ -21,13 +21,44 @@ if (!$AVAILABLE_PAGES[$page]) {
 <title>Admin Panel | Schokolade Hosting</title>
 <link href="./bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
 <style type="text/css">
     h1.page-header {
     margin-top: -5px;
 }
+#table .dropdown-menu {
+    position: relative;
+    float: none;
+    width: 160px;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+}
+.label-info {
+    background-color: #d9534f;
+}
+
+.bg-primary {
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.copyright {
+		text-align: center;
+}
 
 .sidebar {
 	padding-left: 0;
+  padding-right: 10;
 }
 
 .main-container {
@@ -337,6 +368,7 @@ if (!$AVAILABLE_PAGES[$page]) {
 		transform-style: preserve-3d;
 	}
 	/* Hamburger */
+
 	.navbar-toggle-sidebar {
 		border: 0;
 		float: left;
@@ -377,19 +409,12 @@ if (!$AVAILABLE_PAGES[$page]) {
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Schokolade Hosting - Admin Panel</a>
+			<a class="navbar-brand" href="#">Admin Panel | Schokolade Hosting</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/index.php">Visit Site</a></li>
-				<li class="dropdown ">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						Account
-						<span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="./logout.php">Logout</a></li>
-						</ul>
-					</li>
+				<li><a href="/index.php">Home</a></li>
+        <li><a href="./logout.php">Logout</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -424,10 +449,10 @@ if (!$AVAILABLE_PAGES[$page]) {
 				}
 			?>
 		</div>
-		<footer class="pull-left footer">
+		<footer class="copyright footer">
 			<p class="col-md-12">
 				<hr class="divider">
-				Copyright &COPY; 2017
+				Copyright &copy; 2017 Schokolade Hosting - Developed by <a href="#" class="theme-author">panteL</a>
 			</p>
 		</footer>
 	</div>
@@ -446,5 +471,15 @@ if (!$AVAILABLE_PAGES[$page]) {
   	});
   });
 	</script>
+  <script type="text/javascript" charset="utf-8">
+       $(document).ready(function() {
+            $('#test').DataTable({
+                 "language": {
+                      "url": "//cdn.datatables.net/plug-ins/1.10.10/i18n/English.json"
+                 }
+            });
+       } );
+  </script>
+  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
 </body>
 </html>

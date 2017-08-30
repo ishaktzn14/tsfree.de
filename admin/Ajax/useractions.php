@@ -16,7 +16,7 @@ if(strpos(strtolower($id), 'union') || strpos(strtolower($id), 'select') || strp
 if ($act=='del'){
 	mysqli_query($con,"DELETE FROM users WHERE id='$id'");
 	mysqli_close($con);
-	echo "<script language='javascript'>alert('Data Deleted.');
+	echo "<script language='javascript'>
 	document.location='../page.php?page=users';</script>";
 }
 
@@ -31,17 +31,17 @@ if ($act=='add'){
 	}
 	mysqli_query($con,"INSERT INTO users (`id`,`username`,`password`,`email`) VALUES (NULL, '$_POST[username]','$_POST[password]','$_POST[email]')");
 	mysqli_close($con);
-	echo "<script language='javascript'>alert('Data Added.');
+  echo "<script language='javascript'>
 	document.location='../page.php?page=users';</script>";
 }
 
 if ($act=='update'){
 	mysqli_query($con,"UPDATE users SET `password` =  '$_POST[password]',
-										`email` =  '$_POST[email]', 
+										`email` =  '$_POST[email]',
                     `username` =  '$_POST[username]'
 									WHERE `id` = '$id'");
 	mysqli_close($con);
-	echo "<script language='javascript'>alert('Data Updated.');
+	echo "<script language='javascript'>
 	document.location='../page.php?page=users';</script>";
 }
 ?>

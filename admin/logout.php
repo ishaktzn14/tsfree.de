@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_destroy();
-echo "<script>window.alert('try be back soon !');
+echo "<script>
 			window.location='./index.php'</script>";
 die();
 ?>

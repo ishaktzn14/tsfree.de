@@ -1,3 +1,4 @@
+
 <script>
 function FunctionDelete(id) {
     var r = confirm("Are You Sure?");
@@ -9,15 +10,17 @@ function FunctionDelete(id) {
     }
 }
 </script>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span class="glyphicon glyphicon-list"></span> Users
-        <a class="pull-right" data-toggle="modal" data-target="#usuario" href="#" class="btn btn-primary">Add User<i class="fa fa-plus"></i></a>
-    </div>
-    <div class="panel-body">
-		<div class="table-responsive">
-			<?php include './pages/userspagging.php'; ?>
-            <table class="table table-bordered table-hover">
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-mg-10">
+              <a class="pull-right" data-toggle="modal" data-target="#usuario" href="#">
+              <button type="button" class="btn btn-primary btn-md btn-danger">Add User</button>
+              </a>
+                <h2><i class="fa fa-fw fa-list-alt"></i> Admin Users</h2>
+                <br />
+                <div class="panel-responsive" style="border: 0px">
+            <table class="table table-list-search" id="test">
 				<thead>
 					<tr class="bg-primary">
 						<th>ID</th>
@@ -28,41 +31,26 @@ function FunctionDelete(id) {
 				</thead>
 				<tbody>
 					<?php
-					$SQLshow = mysqli_query($con,"SELECT * FROM users ORDER BY id ASC limit $offset, $dataperPage");
-					$noUrut = 1;
+					$SQLshow = mysqli_query($con,"SELECT * FROM users ORDER BY id");
 					while($row = mysqli_fetch_array($SQLshow)){
 					?>
 					<tr>
 						<td><?php echo $row[id]; ?></td>
 						<td><?php echo $row[username]; ?></td>
 						<td><?php echo $row[email]; ?></td>
-						<td><a href="./page.php?page=edituser&id=<?php echo $row[id]; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Edit</button></a>
-						<a href="#" OnClick="FunctionDelete(<?php echo $row[id]; ?>)"><button type="button" class="btn btn-primary btn-md btn-danger">Delete</button></a></td>
+            <td>
+            <?php if ($row[username] !== 'admin') { ?>
+						<a href="./page.php?page=edituser&id=<?php echo $row[id]; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Edit</button></a>
+						<a href="#" OnClick="FunctionDelete(<?php echo $row[id]; ?>)"><button type="button" class="btn btn-primary btn-md btn-danger">Delete</button></a>
+          <?php } ?>
+          </td>
 					</tr>
 					<?php
-					$noUrut++;
 					}
 					?>
 				</tbody>
 			</table>
 		</div>
-    </div>
-    <div class="panel-footer">
-        <div class="row">
-            <div class="col-md-6">
-				<?php
-				$query = mysqli_query($con,"SELECT COUNT(*) jumData from users");
-				$data = mysqli_fetch_array($query);
-				$jumlahData = $data["jumData"];
-				?>
-                <h5>Total Count <span class="label label-info"><?php echo $jumlahData; ?></span></h5>
-            </div>
-			<div class="col-md-6">
-                <ul class="pagination pagination-sm pull-right">
-					<?php include './pages/usersviewpage.php';?>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
 <div class="fade modal" id="usuario">

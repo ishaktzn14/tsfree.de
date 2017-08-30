@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Australia/Victoria');
+date_default_timezone_set('Europe/Berlin');
 error_reporting(E_ALL ^ E_NOTICE);
 @include "./config/config.inc.php";
 session_start();
@@ -15,7 +15,7 @@ if ($user AND $pass){
 		session_start();
 		$_SESSION[username] = $r[username];
 		$_SESSION[password] = $r[password];
-		
+
 		$ip = get_client_ip();
 		$checkip = mysqli_query($con,"SELECT * FROM banned WHERE ipaddr = '$ip'");
 		$found = mysqli_num_rows($checkip);
@@ -30,17 +30,17 @@ if ($user AND $pass){
 												`ipaddr` ,
 												`location` ,
 												`login`)
-										VALUES (NULL,  
+										VALUES (NULL,
 												'$_SESSION[username]',
-												'$ip',									
+												'$ip',
 												'$location',
 												NOW())");
-			mysqli_close($con);		
-		
+			mysqli_close($con);
+
 			echo "<script>window.location='./page.php?page=dashboard'</script>";
 		}
 	} else {
-		echo "<script>window.alert('wrong username or password');</script>";
+		echo "<script>window.alert('Wrong Username or Password');</script>";
 	}
 }
 
@@ -67,9 +67,9 @@ function get_client_ip() {
 <html><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>:: Login Security ::</title>
+<title>Admin Panel | Schokolade Hosting</title>
 <link href="./bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<style>  
+<style>
 .container {
 	padding-top:150px;
 }
@@ -77,7 +77,7 @@ function get_client_ip() {
     opacity: .9;
     -webkit-box-shadow: 0px 7px 24px 1px rgba(0,0,0,0.45);
     -moz-box-shadow: 0px 7px 24px 1px rgba(0,0,0,0.45);
-    box-shadow: 0px 7px 24px 1px rgba(0,0,0,0.45);    
+    box-shadow: 0px 7px 24px 1px rgba(0,0,0,0.45);
 }
 </style>
 </head>
@@ -102,15 +102,15 @@ function get_client_ip() {
 										<div class="input-group"> <span class="input-group-addon"> <i class="glyphicon glyphicon-lock"></i> </span>
 											<input type="password" class="form-control" name="password" placeholder="Password" required="">
 										</div>
-									</div>								   
+									</div>
 									<div class="form-group">
-										<label><input type="checkbox">Keep me Logged in </label> 
+										<label><input type="checkbox"> Keep me Logged in </label>
 										<input type="submit" class="btn btn-success pull-right" value="Log In">
-									</div>               
+									</div>
 								</div>
 							</div>
 						</fieldset>
-					</form>  
+					</form>
 				</div>
 			</div>
 		</div>
