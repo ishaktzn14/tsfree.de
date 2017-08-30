@@ -62,6 +62,15 @@
   mysqli_select_db($conn[0], "$database");
   // END SERVERDATABASE CONNECTION
 
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$checkip = mysqli_query($conn[0],"SELECT * FROM banned WHERE ipaddr = '$ip'");
+	$found = mysqli_num_rows($checkip);
+	if ($found > 0){
+		exit ("The owner of this website has banned your IP address.");
+	}
+
+
+
   // TSDATABASE CONNECTION
   $connect = "serverquery://".$USER_QUERY.":".$PASS_QUERY."@".$HOST_QUERY.":".$PORT_QUERY."";
   $ts3 = TeamSpeak3::factory($connect);
@@ -101,6 +110,7 @@
   $unixTime = time();
   $realTime = date('[Y-m-d]-[H:i]',$unixTime);
   $serverpassword = $_POST['serverpassword'];
+	$password = hash('sha512', $serverpassword);
   $hostbanner_url = $_POST['hostbanner_url'];
 
   // HTML CHANGES
@@ -137,7 +147,7 @@
 
   // SERVERDATABASE INSERT
   $insert = "INSERT INTO $table (Slots, Servername, Port, Passwort, IP, Browser, Date, Token)
-  VALUES ('$slots', '$servername', '$portran', '$serverpassword', '$ip', '$browser', '$dateTime', '$token')";
+  VALUES ('$slots', '$servername', '$portran', '$password', '$ip', '$browser', '$dateTime', '$token')";
   if (!mysqli_query($conn[0], $insert)) {
   echo "Insert Error: " .mysqli_error($conn[0]);
   // END SERVERDATABASE INSERT
@@ -204,7 +214,7 @@
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					 	<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button><a class="navbar-brand" href="/">TeamSpeak Hosting Script v1.1b (BETA)</a>
+					</button><a class="navbar-brand" href="/">TeamSpeak Hosting Script v1.1a (ALPHA)</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -304,7 +314,7 @@
   													</div>
   												</div>
   											</fieldset>
-												<fieldset class="form-group has-error">
+								<!--				<fieldset class="form-group has-error">
 													<label for="servername">Server Password</label>
 														<div class="form-group">
 															<div class="input-group">
@@ -313,7 +323,7 @@
 															</div>
 															<span>Just work if you have the same password as when creating the server on our website.</span>
 														</div>
-													</fieldset>
+													</fieldset> -->
   												<center>
 														<a href="ts3server://<?php echo $HOST_QUERY; ?>:<?php echo $row->Port; ?>?token=<?php echo $row->Token; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Connect with Admin Token (First Connection only).</button></a>
   													<a href="ts3server://<?php echo $HOST_QUERY; ?>:<?php echo $row->Port; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Connect as Normal User.</button></a>
