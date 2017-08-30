@@ -62,6 +62,15 @@
   mysqli_select_db($conn[0], "$database");
   // END SERVERDATABASE CONNECTION
 
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$checkip = mysqli_query($conn[0],"SELECT * FROM banned WHERE ipaddr = '$ip'");
+	$found = mysqli_num_rows($checkip);
+	if ($found > 0){
+		exit ("The owner of this website has banned your IP address.");
+	}
+
+
+
   // TSDATABASE CONNECTION
   $connect = "serverquery://".$USER_QUERY.":".$PASS_QUERY."@".$HOST_QUERY.":".$PORT_QUERY."";
   $ts3 = TeamSpeak3::factory($connect);
