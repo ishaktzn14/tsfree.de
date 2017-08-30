@@ -96,12 +96,13 @@
 }
 } else {
 
-  $servername = mysql_real_escape_string($_POST['servername']);
-  $slots = mysql_real_escape_string($_POST['slots']);
+  $servername = $_POST['servername'];
+  $slots = $_POST['slots'];
   $unixTime = time();
   $realTime = date('[Y-m-d]-[H:i]',$unixTime);
-  $serverpassword = mysql_real_escape_string($_POST['serverpassword']);
-  $hostbanner_url = mysql_real_escape_string($_POST['hostbanner_url']);
+  $serverpassword = $_POST['serverpassword'];
+	$password = hash('sha512', $serverpassword);
+  $hostbanner_url = $_POST['hostbanner_url'];
 
   // HTML CHANGES
   if(strlen($servername) > 25) {
@@ -137,7 +138,7 @@
 
   // SERVERDATABASE INSERT
   $insert = "INSERT INTO $table (Slots, Servername, Port, Passwort, IP, Browser, Date, Token)
-  VALUES ('$slots', '$servername', '$portran', '$serverpassword', '$ip', '$browser', '$dateTime', '$token')";
+  VALUES ('$slots', '$servername', '$portran', '$password', '$ip', '$browser', '$dateTime', '$token')";
   if (!mysqli_query($conn[0], $insert)) {
   echo "Insert Error: " .mysqli_error($conn[0]);
   // END SERVERDATABASE INSERT
@@ -304,7 +305,7 @@
   													</div>
   												</div>
   											</fieldset>
-												<fieldset class="form-group has-error">
+								<!--				<fieldset class="form-group has-error">
 													<label for="servername">Server Password</label>
 														<div class="form-group">
 															<div class="input-group">
@@ -313,7 +314,7 @@
 															</div>
 															<span>Just work if you have the same password as when creating the server on our website.</span>
 														</div>
-													</fieldset>
+													</fieldset> -->
   												<center>
 														<a href="ts3server://<?php echo $HOST_QUERY; ?>:<?php echo $row->Port; ?>?token=<?php echo $row->Token; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Connect with Admin Token (First Connection only).</button></a>
   													<a href="ts3server://<?php echo $HOST_QUERY; ?>:<?php echo $row->Port; ?>"><button type="button" class="btn btn-primary btn-md btn-danger">Connect as Normal User.</button></a>
