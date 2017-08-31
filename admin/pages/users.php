@@ -87,7 +87,7 @@ function FunctionDelete(id) {
 							<label class="col-md-4 control-label" for="email">E-Mail</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input id="email" name="email" class="form-control" placeholder="Insert an E-Mail Address" type="email" value="">
+									<input id="email" name="email" class="form-control" placeholder="Insert an E-Mail Address" type="email" value="" required="">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 								</div>
 							</div>

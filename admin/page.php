@@ -2,9 +2,10 @@
 error_reporting(E_ALL ^ E_NOTICE);
 @include "./config/config.inc.php";
 @include "./session_member.php";
+@include "./Ajax/ts3admin.class.php";
 
 // Sanitize $_GET parameters to avoid XSS and other attacks
-$AVAILABLE_PAGES = array('dashboard', 'banned', 'log', 'adminlog', 'page3', 'users', 'edituser');
+$AVAILABLE_PAGES = array('dashboard', 'banned', 'log', 'adminlog', 'server', 'users', 'edituser');
 $AVAILABLE_PAGES = array_fill_keys($AVAILABLE_PAGES, 1);
 
 $page = $_GET['page'];
@@ -26,10 +27,17 @@ if (!$AVAILABLE_PAGES[$page]) {
     h1.page-header {
     margin-top: -5px;
 }
-#table .dropdown-menu {
-    position: relative;
-    float: none;
-    width: 160px;
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-bottom-left-radius:
+    0px;
+    border-bottom-right-radius:
+    0px;
+    border-top-left-radius:
+    0px;
+    border-top-right-radius:
+    0px;
 }
 .btn-primary {
   color: #fff;
@@ -93,6 +101,7 @@ if (!$AVAILABLE_PAGES[$page]) {
 	background-color: transparent;
 	margin-right: -1px;
 	border-right: 5px solid #e7e7e7;
+
 }
 .side-menu .navbar-nav li {
 	display: block;
@@ -419,15 +428,21 @@ if (!$AVAILABLE_PAGES[$page]) {
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+  <style>
+.nav-pills .li.active {
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+}
+  </style>
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="./page.php?page=dashboard">Home</a></li>
-				<li><a href="./page.php?page=banned">Banned IPs</a></li>
-				<li><a href="./page.php?page=log">Server Log</a></li>
-				<li><a href="./page.php?page=adminlog">Admin Log</a></li>
-				<li><a href="./page.php?page=page3">Page 3</a></li>
-				<li><a href="./page.php?page=users">Users</a></li>
+				<li <?php if ($page=='dashboard') { ?>class="active"<?php } ?>><a href="./page.php?page=dashboard" style="active">Home</a></li>
+				<li <?php if ($page=='log') { ?>class="active"<?php } ?>><a href="./page.php?page=log">Server Log</a></li>
+				<li <?php if ($page=='adminlog') { ?>class="active"<?php } ?>><a href="./page.php?page=adminlog">Admin Log</a></li>
+        <li <?php if ($page=='banned') { ?>class="active"<?php } ?>><a href="./page.php?page=banned">Banned IPs</a></li>
+				<li <?php if ($page=='server') { ?>class="active"<?php } ?>><a href="./page.php?page=server">Server</a></li>
+				<li <?php if ($page=='users') { ?>class="active"<?php } ?>><a href="./page.php?page=users">Users</a></li>
 			</ul>
 		</div>
 		<div class="col-md-10 content">
@@ -440,8 +455,8 @@ if (!$AVAILABLE_PAGES[$page]) {
 					@include './pages/log.php';
 				} elseif ($page=='adminlog'){
 					@include './pages/adminlog.php';
-				} elseif ($page=='page3'){
-					@include './pages/page3.php';
+				} elseif ($page=='server'){
+					@include './pages/server.php';
 				} elseif ($page=='users'){
 					@include './pages/users.php';
 				} elseif ($page=='edituser'){

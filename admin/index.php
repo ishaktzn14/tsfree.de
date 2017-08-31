@@ -8,6 +8,7 @@ $user = mysqli_real_escape_string($con, $_POST['username']);
 $pass = mysqli_real_escape_string($con, $_POST['password']);
 
 if ($user AND $pass){
+
 	$login = mysqli_query($con,"SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
 	$match = mysqli_num_rows($login);
 	$r     = mysqli_fetch_array($login);
